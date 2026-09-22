@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>AIQuickAsk</string>
+    <key>CFBundleDisplayName</key>
+    <string>AI 快捷问答</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.aiquickask.app</string>
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleExecutable</key>
+    <string>AIQuickAsk</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <!-- 必须与 Makefile 的 MACOS_MIN、Package.swift 的 platforms 保持一致。
+         代码用到 macOS 26 的液态玻璃 API 且无 #available 降级，写小了会启动即崩。 -->
+    <key>LSMinimumSystemVersion</key>
+    <string>26.0</string>
+    <!-- 界面语言：本应用的界面文案由 L10n.swift 的两张表提供（不走 .lproj/Localizable.strings，
+         原因见该文件顶部注释）。这里声明本地化清单只是为了两件事：
+         1) 让系统把本应用归入「支持中文/英文」的应用，语言偏好匹配更准；
+         2) CFBundleDevelopmentRegion 与 L10n 判定不出语言时的落点保持一致（简体中文）。 -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>zh_CN</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>zh-Hans</string>
+        <string>en</string>
+    </array>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <!-- 「存为待办」需要写入系统「提醒事项」。macOS 14+ 读 …FullAccess… 键，
+         12–13 读旧键；两个都写上以兼容。
+         注意：**缺这两个键时系统会直接静默拒绝，不会弹授权框** —— 表现为「点了没反应」，
+         极易误判为代码 bug。另外这两个键必须在签名之前写入，因为签名会绑定 Info.plist。
+         文案写中英双语：系统授权框的本地化要靠 InfoPlist.strings（.lproj 机制），
+         而本工程刻意不走 .lproj（见 L10n.swift 顶部注释），双语并列是唯一务实的选择。 -->
+    <key>NSRemindersFullAccessUsageDescription</key>
+    <string>用于把你在输入框里以 #todo 写下的内容、以及 AI 回答，直接创建为系统「提醒事项」，省去手动抄录。/ Creates Reminders directly from your #todo notes and AI answers, so you don't have to copy them by hand.</string>
+    <key>NSRemindersUsageDescription</key>
+    <string>用于把你在输入框里以 #todo 写下的内容、以及 AI 回答，直接创建为系统「提醒事项」，省去手动抄录。/ Creates Reminders directly from your #todo notes and AI answers, so you don't have to copy them by hand.</string>
+</dict>
+</plist>
